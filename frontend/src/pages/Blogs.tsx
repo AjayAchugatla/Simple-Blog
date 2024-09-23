@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import New from "../Components/New"
+import change from "../utils/dc.ts"
 
 function Blogs() {
     const navigate = useNavigate()
@@ -52,7 +53,7 @@ function Blogs() {
                                 authorName={blog.author.name}
                                 title={blog.title}
                                 content={blog.content}
-                                date="22 Aug 2024"
+                                date={change(blog.createdAt, true)}
                                 key={blog.id}
                             />
                         ) :

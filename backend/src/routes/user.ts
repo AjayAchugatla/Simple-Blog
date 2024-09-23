@@ -34,6 +34,7 @@ user.post('/signup', async (c) => {
             data: {
                 email: body.email,
                 name: body.name,
+                bio: body.bio,
                 password: res
             }
         })
@@ -126,7 +127,9 @@ user.get('/get-user', async (c) => {
             where: {
                 id: uid
             }, select: {
-                name: true
+                name: true,
+                id: true,
+                bio: true
             }
         })
         if (!u) {
@@ -144,4 +147,5 @@ user.get('/get-user', async (c) => {
         })
     }
 })
+
 export default user

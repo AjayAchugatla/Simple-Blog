@@ -17,6 +17,7 @@ function Signup() {
     const [inputs, setInputs] = useState<su>({
         email: "",
         name: "",
+        bio: "",
         password: ""
     })
 
@@ -65,6 +66,9 @@ function Signup() {
                     }} />
                     <Input label='text' placeholder="Enter Name" onChange={(e) => {
                         setInputs({ ...inputs, name: e.target.value })
+                    }} />
+                    <Input label='info' placeholder="Enter Bio" onChange={(e) => {
+                        setInputs({ ...inputs, bio: e.target.value })
                     }} />
                     <Input label="password" placeholder="Enter Password" onChange={(e) => {
                         setInputs({ ...inputs, password: e.target.value })

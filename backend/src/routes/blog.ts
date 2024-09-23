@@ -106,9 +106,11 @@ blog.get('/bulk', async (c) => {
                 content: true,
                 title: true,
                 id: true,
+                createdAt: true,
                 author: {
                     select: {
-                        name: true
+                        name: true,
+                        bio: true,
                     }
                 }
             }
@@ -142,9 +144,11 @@ blog.get('/:id', async (c) => {
                 id: true,
                 title: true,
                 content: true,
+                createdAt: true,
                 author: {
                     select: {
-                        name: true
+                        name: true,
+                        bio: true,
                     }
                 }
             }

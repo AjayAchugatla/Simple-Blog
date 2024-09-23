@@ -5,8 +5,10 @@ export type Blog = {
     "content": string,
     "title": string,
     "id": string,
+    "createdAt": "string",
     "author": {
-        "name": string
+        "name": string,
+        "bio": string,
     },
 }
 
