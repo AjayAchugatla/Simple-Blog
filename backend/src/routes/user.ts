@@ -139,7 +139,8 @@ user.get('/get-user', async (c) => {
         }
         return c.json({
             message: true,
-            name: u.name
+            name: u.name,
+            id: u.id
         })
     } catch (error) {
         return c.json({

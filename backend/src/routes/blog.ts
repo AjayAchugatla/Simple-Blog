@@ -149,6 +149,7 @@ blog.get('/:id', async (c) => {
                     select: {
                         name: true,
                         bio: true,
+                        id: true
                     }
                 }
             }

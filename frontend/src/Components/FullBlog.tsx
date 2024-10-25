@@ -4,19 +4,50 @@ import Avatar from "./Avatar"
 import change from "../utils/dc.ts"
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function FullBlog({ blog }: { blog: Blog }) {
+
+    const navigate = useNavigate();
+    const [id, setId] = useState("");
+    const getuser = async () => {
+        const token = localStorage.getItem("token")
+        if (token) {
+            const response = await axios.get(import.meta.env.VITE_BACKEND_URL + '/user/get-user', {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            })
+            if (response.data.message) {
+                setId(response.data.id)
+            } else {
+                navigate('/signin')
+            }
+        }
+        else {
+            navigate('/signin')
+        }
+    }
+
+    useEffect(() => {
+        getuser();
+    }, [])
+
+
     return (
         <div>
             <Appbar />
             <div className="flex justify-center">
                 <div className="grid grid-cols-12 px-10 w-full pt-12 max-w-screen-lg sm:gap-12 gap-6">
                     <div className="sm:col-span-8 col-span-12">
-                        <div className="text-5xl font-extrabold flex">
+                        <div className="text-[2.5rem] font-extrabold flex">
                             {blog.title}
-                            <Link to={'/edit'} className="text-3xl relative left-60 top-4">
-                                <CiEdit className="text-black" />
-                            </Link>
+                            {id === blog.author.id ?
+                                <Link to={'/edit'} className="text-4xl relative top-4 left-5">
+                                    <CiEdit className="text-black" />
+                                </Link> : null}
                         </div>
                         <div className="text-slate-300 pt-2">
                             {change(blog.createdAt, false)}

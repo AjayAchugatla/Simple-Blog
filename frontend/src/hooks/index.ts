@@ -7,6 +7,7 @@ export type Blog = {
     "id": string,
     "createdAt": "string",
     "author": {
+        "id": string;
         "name": string,
         "bio": string,
     },
