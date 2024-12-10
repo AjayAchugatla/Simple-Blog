@@ -56,24 +56,24 @@ export const useBlog = (id: string) => {
     return { loading, blog }
 }
 
-export const useUser = () => {
-    const [loading, setLoading] = useState(true);
-    const [name, setName] = useState<string>();
+// export const useUser = () => {
+//     const [loading, setLoading] = useState(true);
+//     const [name, setName] = useState<string>();
 
-    const getuser = async () => {
-        const token = localStorage.getItem("token")
-        const response = await axios.get(import.meta.env.VITE_BACKEND_URL + '/user/get-user', {
-            headers: {
-                Authorization: "Bearer " + token
-            }
-        })
-        if (response.data.message) {
-            setName(response.data.name)
-            setLoading(false)
-        }
-    }
-    useEffect(() => {
-        getuser()
-    }, [])
-    return { loading, name }
-}
+//     const getuser = async () => {
+//         const token = localStorage.getItem("token")
+//         const response = await axios.get(import.meta.env.VITE_BACKEND_URL + '/user/get-user', {
+//             headers: {
+//                 Authorization: "Bearer " + token
+//             }
+//         })
+//         if (response.data.message) {
+//             setName(response.data.name)
+//             setLoading(false)
+//         }
+//     }
+//     useEffect(() => {
+//         getuser()
+//     }, [])
+//     return { loading, name }
+// }

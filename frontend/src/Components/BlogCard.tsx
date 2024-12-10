@@ -1,5 +1,5 @@
 import Avatar from "./Avatar"
-import { Link } from "react-router-dom"
+import ReadMore from "./ReadMore"
 
 interface props {
     id: string
@@ -7,11 +7,13 @@ interface props {
     title: string,
     content: string,
     date: string
+    onRead: () => void
 }
 
-export function BlogCard({ authorName, title, content, date, id }: props) {
+export function BlogCard({ authorName, title, content, date, onRead }: props) {
+
     return (
-        <Link to={`/blog/${id}`}>
+        <div>
             <div className='border-b border-slate-200 p-4 w-screen max-w-screen-sm cursor-pointer'>
                 <div className='flex'>
                     <div className='flex justify-center flex-col mt-[3px]'>
@@ -24,8 +26,8 @@ export function BlogCard({ authorName, title, content, date, id }: props) {
                         {date}
                     </div>
                 </div>
-                <div className='text-xl font-semibold pt-2'>
-                    {title}
+                <div className='text-xl font-semibold pt-2 flex'>
+                    {title}<ReadMore onClick={onRead} />
                 </div>
                 <div className='text-md font-thin'>
                     {`${content.slice(0, 100)} ${content.length > 100 ? "..." : ""}`}
@@ -34,7 +36,7 @@ export function BlogCard({ authorName, title, content, date, id }: props) {
                     {`${Math.ceil(content.length / 100)} minute(s) read`}
                 </div>
             </div>
-        </Link>
+        </div>
     )
 }
 

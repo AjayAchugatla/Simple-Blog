@@ -3,12 +3,15 @@ import axios from "axios"
 import { useState } from "react"
 import Error from "../Components/Error";
 import { useNavigate } from "react-router-dom";
+import blogAtom from "../recoil/atoms/blogAtom";
+import { useSetRecoilState } from "recoil";
 
 function Publish() {
     const [error, setError] = useState("")
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
 
+    const setBlog = useSetRecoilState(blogAtom)
     const navigate = useNavigate()
     const submit = async () => {
         if (title === "") {
@@ -29,9 +32,9 @@ function Publish() {
             })
             if (response.data.id) {
                 navigate(`/blog/${response.data.id}`)
+                setBlog(response.data)
             }
         } catch (error) {
-
             console.log(error);
         }
     }

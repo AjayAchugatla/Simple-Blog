@@ -63,7 +63,9 @@ blog.post('/', async (c) => {
         }
     })
     return c.json({
-        id: resp.id
+        id: resp.id,
+        title: resp.title,
+        content: resp.content,
     })
 
 })
@@ -72,6 +74,7 @@ blog.put('/', async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
+
     const body = await c.req.json();
     const { success } = updateBlogInput.safeParse(body)
     if (!success) {
@@ -91,8 +94,6 @@ blog.put('/', async (c) => {
     return c.json({
         id: resp.id
     })
-
-
 })
 
 blog.get('/bulk', async (c) => {
@@ -133,7 +134,7 @@ blog.get('/:id', async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
-    // const body = await c.req.json();
+
     const id = c.req.param("id")
     try {
         const resp = await prisma.post.findFirst({
@@ -168,10 +169,33 @@ blog.get('/:id', async (c) => {
             error: "Error fetching blog"
         })
     }
-
-
 })
 
+blog.delete('/:id', async (c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+    const id = c.req.param("id")
+    try {
+        const resp = await prisma.post.delete({
+            where: {
+                id: id
+            }
+        })
+        if (resp) {
+            return c.json({ success: true })
+        }
+        else {
+            return c.json({
+                error: "Error deleting blog"
+            })
+        }
+    } catch (error) {
+        return c.json({
+            error: "Error deleting blog"
+        })
+    }
+})
 
 
 export default blog

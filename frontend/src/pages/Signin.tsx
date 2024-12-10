@@ -43,7 +43,7 @@ function Signin() {
             if (response.data.error) {
                 setError(response.data.error)
             } else {
-                const token = response.data
+                const token = response.data.token
                 localStorage.setItem("token", token)
                 navigate('/blogs')
             }

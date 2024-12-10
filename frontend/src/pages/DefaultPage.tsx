@@ -3,7 +3,7 @@ import Loader from "../Components/Loader"
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
 
-function MainPage() {
+function DefaultPage() {
 
     const navigate = useNavigate();
     const getuser = async () => {
@@ -36,4 +36,4 @@ function MainPage() {
     )
 }
 
-export default MainPage
+export default DefaultPage
