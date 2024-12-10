@@ -4,7 +4,7 @@ const ReadMore = ({ onClick }: { onClick: () => void }) => {
     return (
         <button
             className="flex items-center  text-slate-400 gap-1 p-4 cursor-pointer  font-semibold tracking-widest rounded-lg  duration-300 hover:gap-2 
-            text-sm hover:translate-x-3 h-7 "
+            text-sm hover:translate-x-3 h-7 hover:text-black "
             onClick={onClick}
         >
             Read More
