@@ -19,8 +19,6 @@ export const useBlogs = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
     const getBlogs = async () => {
-
-
         const response = await axios.get(import.meta.env.VITE_BACKEND_URL + '/blog/bulk', {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")

@@ -24,8 +24,7 @@ blog.use('/*', async (c, next) => {
 
         if (resp) {
             const id = resp.id
-            // @ts-ignore
-            c.set("userId", id)
+            c.set("userId", id as string)
             await next()
         }
         else {
@@ -47,6 +46,7 @@ blog.post('/', async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
+
     const body = await c.req.json();
     const { success } = blogInput.safeParse(body)
     if (!success) {

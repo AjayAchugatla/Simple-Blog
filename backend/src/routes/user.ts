@@ -76,7 +76,9 @@ user.post('/signin', async (c) => {
         const resp = await verifyPassword(u.password, body.password)
         if (resp) {
             const token = await sign({ id: u.id }, c.env.JWT_SECRET)
-            return c.text(token)
+            return c.json({
+                token: token
+            })
         }
         return c.json({ error: "Incorrect password" })
     } catch (error) {
@@ -91,14 +93,10 @@ user.use('/get-user', async (c, next) => {
     try {
         const header = c.req.header('authorization') || "";
         const token = header.split(" ")[1];
-
         const resp = await verify(token, c.env.JWT_SECRET)
-        // console.log(resp);
-
         if (resp) {
             const id = resp.id
-            // @ts-ignore
-            c.set("userId", id)
+            c.set("userId", id as string)
             await next()
         }
         else {
