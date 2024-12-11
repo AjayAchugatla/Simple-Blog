@@ -5,7 +5,6 @@ import Error from "../Components/Error";
 import { useNavigate } from "react-router-dom";
 import blogAtom from "../recoil/atoms/blogAtom";
 import { useSetRecoilState } from "recoil";
-import TextEditor from "../Components/TextEditor";
 
 
 function Publish() {
@@ -48,9 +47,8 @@ function Publish() {
 
                     <input type="text" className="block w-full  px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-sm placeholder-gray-400 focus:outline-none leading-relaxed " placeholder="Title" required onChange={(e) => setTitle(e.target.value)} />
                     <br />
-                    {/* <textarea className="block w-full  h-60 px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-sm placeholder-gray-400 focus:outline-none leading-relaxed resize-none mt-3 mb-2" placeholder="Enter content..." onChange={(e) => setContent(e.target.value)}></textarea> */}
+                    <textarea className="block w-full  h-60 px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-sm placeholder-gray-400 focus:outline-none leading-relaxed resize-none mt-3 mb-2" placeholder="Enter content..." onChange={(e) => setContent(e.target.value)}></textarea> 
                     <Error text={error} />
-                    <TextEditor />
 
                     <div className="mt-2 flex justify-center">
                         <button onClick={submit} type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 w-40">Publish</button>
