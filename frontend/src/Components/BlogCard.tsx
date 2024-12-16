@@ -1,6 +1,5 @@
 import Avatar from "./Avatar"
 import ReadMore from "./ReadMore"
-import Editor from "./TextEditor"
 
 interface props {
     id: string
