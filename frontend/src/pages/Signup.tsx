@@ -9,10 +9,11 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import Error from "../Components/Error"
 import { useEffect } from "react"
-
+import Loader from "../Components/Loader"
 
 function Signup() {
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const [inputs, setInputs] = useState<su>({
         email: "",
@@ -24,6 +25,7 @@ function Signup() {
 
 
     const getuser = async () => {
+        setLoading(true)
         const token = localStorage.getItem("token")
         if (token) {
             const reponse = await axios.get(import.meta.env.VITE_BACKEND_URL + '/user/get-user', {
@@ -33,8 +35,10 @@ function Signup() {
             })
             if (reponse.data.message) {
                 navigate('/blogs')
+                setLoading(false)
             }
         }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -56,29 +60,32 @@ function Signup() {
     }
 
     return (
-        <div className="grid md:grid-cols-2 md:mt-0 mt-[25vh]">
-            <div className="flex justify-center items-center flex-col">
-                <Heading content="Create an account" />
-                <Subheading content="Already have an account?" to={'signin'} />
-                <div className="max-w-md space-y-3">
-                    <Input label="email" placeholder="Enter Email" onChange={(e) => {
-                        setInputs({ ...inputs, email: e.target.value })
-                    }} />
-                    <Input label='text' placeholder="Enter Name" onChange={(e) => {
-                        setInputs({ ...inputs, name: e.target.value })
-                    }} />
-                    <Input label='info' placeholder="Enter Bio" onChange={(e) => {
-                        setInputs({ ...inputs, bio: e.target.value })
-                    }} />
-                    <Input label="password" placeholder="Enter Password" onChange={(e) => {
-                        setInputs({ ...inputs, password: e.target.value })
-                    }} />
-                    <Error text={error} />
-                    <Button label="Sign Up" fun={handleLogin} />
+        <>{loading ? <Loader /> :
+            <div className="grid md:grid-cols-2 md:mt-0 mt-[25vh]">
+                <div className="flex justify-center items-center flex-col">
+                    <Heading content="Create an account" />
+                    <Subheading content="Already have an account?" to={'signin'} />
+                    <div className="max-w-md space-y-3">
+                        <Input label="email" placeholder="Enter Email" onChange={(e) => {
+                            setInputs({ ...inputs, email: e.target.value })
+                        }} />
+                        <Input label='text' placeholder="Enter Name" onChange={(e) => {
+                            setInputs({ ...inputs, name: e.target.value })
+                        }} />
+                        <Input label='info' placeholder="Enter Bio" onChange={(e) => {
+                            setInputs({ ...inputs, bio: e.target.value })
+                        }} />
+                        <Input label="password" placeholder="Enter Password" onChange={(e) => {
+                            setInputs({ ...inputs, password: e.target.value })
+                        }} />
+                        <Error text={error} />
+                        <Button label="Sign Up" fun={handleLogin} />
+                    </div>
                 </div>
+                <Quote />
             </div>
-            <Quote />
-        </div>
+        }
+        </>
     )
 }
 

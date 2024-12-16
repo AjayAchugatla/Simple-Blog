@@ -11,6 +11,7 @@ import { useRecoilValue } from "recoil";
 import Modal from 'react-modal';
 import { useState } from "react";
 import axios from "axios";
+import Editor from "./TextEditor.tsx";
 
 
 function FullBlog({ blog }: { blog: Blog }) {
@@ -71,15 +72,12 @@ function FullBlog({ blog }: { blog: Blog }) {
                         <div className="text-slate-300 pt-2">
                             {change(blog.createdAt, false)}
                         </div>
-                        <div className="pt-4">
-                            {blog.content}
+                        <div className="-ml-4 absolute sm:relative top-64 sm:top-0">
+                            <Editor content={blog.content} readOnly={true} />
                         </div>
                     </div>
-                    <div className="sm:col-span-4 col-span-12">
-                        <div className="text-slate-600 text-lg">
-                            Author:
-                        </div>
-                        <div className="flex gap-2">
+                    <div className="sm:col-span-4 col-span-12 sm:relative absolute sm:top-0 top-40">
+                        <div className="flex gap-1">
                             <div className="flex justify-center flex-col">
                                 <Avatar name={blog.author.name} size="big" />
                             </div>

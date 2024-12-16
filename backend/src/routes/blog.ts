@@ -92,7 +92,9 @@ blog.put('/', async (c) => {
         }
     })
     return c.json({
-        id: resp.id
+        id: body.id,
+        title: body.title,
+        content: body.content
     })
 })
 

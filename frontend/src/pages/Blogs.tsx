@@ -48,7 +48,7 @@ function Blogs() {
     }
     return (
         <div>
-            <div className="">
+            <div>
                 <Appbar />
                 <div className="flex justify-center sm:mb-2 ">
                     <div>

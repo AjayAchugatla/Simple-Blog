@@ -5,7 +5,7 @@ import Error from "../Components/Error";
 import { useNavigate } from "react-router-dom";
 import blogAtom from "../recoil/atoms/blogAtom";
 import { useSetRecoilState } from "recoil";
-
+import Editor from "../Components/TextEditor";
 
 function Publish() {
     const [error, setError] = useState("")
@@ -47,7 +47,10 @@ function Publish() {
 
                     <input type="text" className="block w-full  px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-sm placeholder-gray-400 focus:outline-none leading-relaxed " placeholder="Title" required onChange={(e) => setTitle(e.target.value)} />
                     <br />
-                    <textarea className="block w-full  h-60 px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-sm placeholder-gray-400 focus:outline-none leading-relaxed resize-none mt-3 mb-2" placeholder="Enter content..." onChange={(e) => setContent(e.target.value)}></textarea> 
+                    {/* <textarea className="block w-full  h-60 px-4 py-2 text-sm font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-sm placeholder-gray-400 focus:outline-none leading-relaxed resize-none mt-3 mb-2" placeholder="Enter content..." onChange={(e) => setContent(e.target.value)}></textarea>  */}
+                    <div>
+                        <Editor content={content} setContent={setContent} readOnly={false} />
+                    </div>
                     <Error text={error} />
 
                     <div className="mt-2 flex justify-center">
